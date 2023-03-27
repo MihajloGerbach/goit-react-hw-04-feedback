@@ -1,16 +1,16 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { SectionBox, Header } from './Section.styled';
+import css from './Section.module.css';
 
-export function Section({title, children}) {
-    return (
-        <SectionBox>
-            <Header>{title}</Header>
-            {children}
-        </SectionBox>
-    )
-}
+export const Section = ({ title, children }) => {
+  return (
+    <section className={css.section}>
+      <h1 className={css.title}>{title}</h1>
+      {children}
+    </section>
+  );
+};
 
 Section.propTypes = {
-    title: PropTypes.string.isRequired, 
-    children: PropTypes.element.isRequired,
-}
+  title: PropTypes.string.isRequired,
+};

@@ -1,19 +1,33 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FeedBackList, FeedBackListItem, FeedBackOption } from './FeedbackOptions.styled';
+import css from './FeedbackOptions.module.css';
 
-export function FeedbackOptions({options, onLeaveFeedback}) {
-    return (
-        <FeedBackList>
-            {options.map((item, idx) => {
-                return ( <FeedBackListItem key={idx}>
-                            <FeedBackOption name={item} onClick={(evt)=>onLeaveFeedback(evt)} type="button">{item}</FeedBackOption>
-                        </FeedBackListItem> )
-            })}
-        </FeedBackList>
-          )
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  return (
+    <ul className={css.list}>
+      {options.map((el, i) => {
+        return (
+          <li key={i} className={css.item}>
+            <button
+              className={css.btn}
+              name={el}
+              type="button"
+              onClick={onLeaveFeedback}
+            >
+              {capitalizeFirstLetter(el)}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 FeedbackOptions.propTypes = {
-    options: PropTypes.array.isRequired, 
-    onLeaveFeedback: PropTypes.func.isRequired,
-}
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
